@@ -7,7 +7,7 @@ namespace CDExellentAPI.Entities
     public class Area
     {
         [Key]
-        [StringLength(100)]
+        [StringLength(20)]
         public string ID { get; set; }
         [StringLength(100)]
         public string Name { get; set; }

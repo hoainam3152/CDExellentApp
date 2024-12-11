@@ -1,4 +1,6 @@
 using CDExellentAPI.Entities;
+using CDExellentAPI.Repositories;
+using CDExellentAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +14,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ManagementDbContext>(option => option.UseSqlServer(
         builder.Configuration.GetConnectionString("DB")
     ));
+
+//Register Services
+builder.Services.AddScoped<IAreaRepository, AreaService>();
 
 var app = builder.Build();
 
