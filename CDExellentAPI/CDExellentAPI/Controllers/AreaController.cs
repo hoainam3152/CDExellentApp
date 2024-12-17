@@ -1,11 +1,14 @@
-﻿using CDExellentAPI.Repositories;
+﻿using CDExellentAPI.Enums;
+using CDExellentAPI.Repositories;
+using CoreApiResponse;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace CDExellentAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AreaController : ControllerBase
+    public class AreaController : BaseController
     {
         private readonly IAreaRepository service;
 
@@ -15,21 +18,20 @@ namespace CDExellentAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAll()
+        public IActionResult GetAll()
         {
             try
             {
                 var areas = service.GetAll();
-                if (areas != null)
+                if (areas.Any())
                 {
-                    return Ok(areas);
+                    return CustomResult(ResponseMessage.SUCCESSFULLY, areas, HttpStatusCode.OK);
                 }
-                return BadRequest();
+                return CustomResult(ResponseMessage.EMPTY, HttpStatusCode.NotFound);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return CustomResult(ex.Message, HttpStatusCode.BadRequest);
             }
         }
     }
