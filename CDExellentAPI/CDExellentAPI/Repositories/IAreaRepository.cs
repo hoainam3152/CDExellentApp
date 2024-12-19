@@ -8,8 +8,8 @@ namespace CDExellentAPI.Repositories
     {
         IEnumerable<AreaResponse> GetAll();
         AreaResponse? GetById(string id);
-        AreaResponse Create(AreaCreate request);
-        void Update(AreaUpdate request);
-        void Delete(int id);
+        AreaResponse? Create(AreaCreate request);
+        AreaResponse? Update(string id, AreaUpdate request);
+        AreaResponse? Delete(string id);
     }
 }

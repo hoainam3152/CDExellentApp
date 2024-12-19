@@ -3,10 +3,16 @@
     public class ResponseMessage
     {
         //Success
-        public const string SUCCESSFULLY = "Successfully";
-        public const string CREATED_SUCCESSFULLY = "Created Successfully";
-        public const string UPDATED_SUCCESSFULLY = "Updated Successfully";
-        public const string DELETED_SUCCESSFULLY = "Deleted Successfully";
+        public const string SUCCESSFUL = "Successful";
+        public const string CREATE_SUCCESSFUL = "Create Successful";
+        public const string UPDATE_SUCCESSFUL = "Update Successful";
+        public const string DELETE_SUCCESSFUL = "Delete Successful";
+
+        //Fail
+        public const string FAILED = "Failed";
+        public const string CREATE_FAILED = "Create Failed";
+        public const string UPDATE_FAILED = "Update Failed";
+        public const string DELETE_FAILED = "Delete Failed";
 
         //Error
         public const string EMPTY = "Empty Data";

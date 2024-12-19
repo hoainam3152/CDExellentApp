@@ -2,6 +2,7 @@
 using CDExellentAPI.DTO.Responses;
 using CDExellentAPI.Entities;
 using CDExellentAPI.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace CDExellentAPI.Services
 {
@@ -13,14 +14,47 @@ namespace CDExellentAPI.Services
         {
             this.context = context;
         }
-        public AreaResponse Create(AreaCreate request)
+
+        public AreaResponse? Create(AreaCreate request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var area = context.Areas.FirstOrDefault(ar => ar.ID == request.ID);
+                if (area == null)   //Data not exist
+                {
+                    context.Areas.Add(new Area()
+                    {
+                        ID = request.ID,
+                        Name = request.Name
+                    });
+                    context.SaveChangesAsync();
+                    return null;    
+                }
+                return new AreaResponse(area);
+            }
+            catch
+            {
+                throw new DbUpdateException();
+            }
         }
 
-        public void Delete(int id)
+        public AreaResponse? Delete(string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var area = context.Areas.FirstOrDefault(ar => ar.ID == id);
+                if (area != null)   //Data exist
+                {
+                    context.Areas.Remove(area);
+                    context.SaveChangesAsync();
+                    return new AreaResponse(area);
+                }
+                return null;
+            }
+            catch
+            {
+                throw new DbUpdateException();
+            }
         }
 
         public IEnumerable<AreaResponse> GetAll()
@@ -39,18 +73,28 @@ namespace CDExellentAPI.Services
             var area = context.Areas.FirstOrDefault(ar => ar.ID == id);
             if (area != null)
             {
-                return new AreaResponse()
-                {
-                    ID = area.ID,
-                    Name = area.Name
-                };
+                return new AreaResponse(area);
             }
             return null;
         }
 
-        public void Update(AreaUpdate request)
+        public AreaResponse? Update(string id, AreaUpdate request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var area = context.Areas.FirstOrDefault(ar => ar.ID == id);
+                if (area != null)   //Data exist
+                {
+                    area.Name = request.Name;
+                    context.SaveChangesAsync();
+                    return new AreaResponse(area);
+                }
+                return null;
+            }
+            catch
+            {
+                throw new DbUpdateException();
+            }
         }
     }
 }
