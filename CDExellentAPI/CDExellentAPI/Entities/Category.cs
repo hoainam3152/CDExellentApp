@@ -3,16 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CDExellentAPI.Entities
 {
-    [Table("Area")]
-    public class Area
+    [Table("Category")]
+    public class Category
     {
         [Key]
-        [StringLength(20)]
-        public string ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
         [StringLength(100)]
         public string Name { get; set; }
 
-        public ICollection<User> Users { get; set; }
-        public ICollection<Distributor> Distributors { get; set; }
+        public ICollection<Title> Titles { get; set; }
     }
 }
