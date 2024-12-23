@@ -13,7 +13,6 @@ namespace CDExellentAPI.Entities
         public string Name { get; set; }
         [StringLength(255)]
         public string Email { get; set; }
-        [StringLength(20)]
         public int TitleId { get; set; }
         [StringLength(20)]
         public string? AreaId { get; set; }
@@ -33,7 +32,17 @@ namespace CDExellentAPI.Entities
         [ForeignKey("ManagerId")]
         public User Manager { get; set; }
 
+        //User
         public ICollection<User> Managers { get; set; }
+        //Distributor
         public ICollection<Distributor> Distributors { get; set; }
+        //Guest
+        public ICollection<Guest> Guests { get; set; }
+        //Visit Plan
+        public ICollection<VisitPlan> VisitPlans { get; set; }
+        //Task
+        public ICollection<Task> AssignedTasks { get; set; }
+        public ICollection<Task> ReportedTasks { get; set; }
+        public ICollection<Task> PlannedTasks { get; set; }
     }
 }

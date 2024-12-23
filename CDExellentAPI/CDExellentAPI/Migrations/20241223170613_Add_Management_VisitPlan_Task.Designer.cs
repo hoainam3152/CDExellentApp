@@ -4,6 +4,7 @@ using CDExellentAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CDExellentAPI.Migrations
 {
     [DbContext(typeof(ManagementDbContext))]
-    partial class ManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241223170613_Add_Management_VisitPlan_Task")]
+    partial class Add_Management_VisitPlan_Task
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -69,6 +71,9 @@ namespace CDExellentAPI.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<int?>("DistributorID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -95,6 +100,8 @@ namespace CDExellentAPI.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("AreaId");
+
+                    b.HasIndex("DistributorID");
 
                     b.HasIndex("SalesManagementId");
 
@@ -385,6 +392,10 @@ namespace CDExellentAPI.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("CDExellentAPI.Entities.Distributor", null)
+                        .WithMany("Distributors")
+                        .HasForeignKey("DistributorID");
+
                     b.HasOne("CDExellentAPI.Entities.User", "SalesManagement")
                         .WithMany("Distributors")
                         .HasForeignKey("SalesManagementId")
@@ -497,7 +508,7 @@ namespace CDExellentAPI.Migrations
             modelBuilder.Entity("CDExellentAPI.Entities.VisitPlan", b =>
                 {
                     b.HasOne("CDExellentAPI.Entities.Distributor", "Distributor")
-                        .WithMany("VisitPlans")
+                        .WithMany()
                         .HasForeignKey("DistributorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -543,7 +554,7 @@ namespace CDExellentAPI.Migrations
 
             modelBuilder.Entity("CDExellentAPI.Entities.Distributor", b =>
                 {
-                    b.Navigation("VisitPlans");
+                    b.Navigation("Distributors");
                 });
 
             modelBuilder.Entity("CDExellentAPI.Entities.PlanStatus", b =>

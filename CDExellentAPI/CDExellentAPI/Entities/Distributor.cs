@@ -25,5 +25,7 @@ namespace CDExellentAPI.Entities
         public User SalesManagement { get; set; }
         [ForeignKey("AreaId")]
         public Area Area { get; set; }
+
+        public ICollection<VisitPlan> VisitPlans { get; set; }
     }
 }
