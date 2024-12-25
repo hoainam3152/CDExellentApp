@@ -18,14 +18,20 @@ namespace CDExellentAPI.Entities
         public DbSet<Guest> Guests { get; set; }
         public DbSet<TaskStatus> TaskStatuses { get; set; }
         public DbSet<Task> Tasks { get; set; }
-        
-        //public DbSet<Area> Areas { get; set; }
-        //public DbSet<Area> Areas { get; set; }
-        //public DbSet<Area> Areas { get; set; }
-        //public DbSet<Area> Areas { get; set; }
-        //public DbSet<Area> Areas { get; set; }
-        //public DbSet<Area> Areas { get; set; }
-        //public DbSet<Area> Areas { get; set; }
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Delegation> Delegations { get; set; }
+        public DbSet<Media> Medias { get; set; }
+        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        //public DbSet<Survey> Surveys { get; set; }
+        //public DbSet<Survey> Surveys { get; set; }
+        //public DbSet<Survey> Surveys { get; set; }
+        //public DbSet<Survey> Surveys { get; set; }
+        //public DbSet<Survey> Surveys { get; set; }
+        //public DbSet<Survey> Surveys { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -80,6 +86,22 @@ namespace CDExellentAPI.Entities
                 .WithMany(e => e.Distributors)
                 .HasForeignKey(e => e.AreaId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            //User_Permission
+            modelBuilder.Entity<Delegation>(entity =>
+            {
+                //Create many PK
+                entity.HasKey(e => new { e.UserId, e.PermissionId });
+
+                //Create FK
+                entity.HasOne(e => e.User)
+                    .WithMany(e => e.Delegations)
+                    .HasForeignKey(e => e.UserId);
+
+                entity.HasOne(e => e.Permission)
+                    .WithMany(e => e.Delegations)
+                    .HasForeignKey(e => e.PermissionId);
+            });
         }
     }
 }

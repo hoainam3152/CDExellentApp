@@ -4,6 +4,7 @@ using CDExellentAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CDExellentAPI.Migrations
 {
     [DbContext(typeof(ManagementDbContext))]
-    partial class ManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241225152307_Add_Management_Permission_Media")]
+    partial class Add_Management_Permission_Media
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,29 +23,6 @@ namespace CDExellentAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CDExellentAPI.Entities.Answer", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("QuestionId");
-
-                    b.ToTable("Answers");
-                });
 
             modelBuilder.Entity("CDExellentAPI.Entities.Area", b =>
                 {
@@ -59,47 +38,6 @@ namespace CDExellentAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Area");
-                });
-
-            modelBuilder.Entity("CDExellentAPI.Entities.Blog", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("FilePath")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("ImagePath")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CreatorId");
-
-                    b.ToTable("Blog");
                 });
 
             modelBuilder.Entity("CDExellentAPI.Entities.Category", b =>
@@ -132,7 +70,7 @@ namespace CDExellentAPI.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("Deligation");
+                    b.ToTable("User_Permission");
                 });
 
             modelBuilder.Entity("CDExellentAPI.Entities.Distributor", b =>
@@ -214,12 +152,7 @@ namespace CDExellentAPI.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Media");
                 });
@@ -281,65 +214,6 @@ namespace CDExellentAPI.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("PlanStatus");
-                });
-
-            modelBuilder.Entity("CDExellentAPI.Entities.Question", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("ImagePath")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool?>("IsMultiSelect")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SurveyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("SurveyId");
-
-                    b.ToTable("Question");
-                });
-
-            modelBuilder.Entity("CDExellentAPI.Entities.Survey", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CreatorId");
-
-                    b.ToTable("Survey");
                 });
 
             modelBuilder.Entity("CDExellentAPI.Entities.Task", b =>
@@ -479,6 +353,21 @@ namespace CDExellentAPI.Migrations
                     b.ToTable("TypeDate");
                 });
 
+            modelBuilder.Entity("CDExellentAPI.Entities.Upload", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MediaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "MediaId");
+
+                    b.HasIndex("MediaId");
+
+                    b.ToTable("User_Media");
+                });
+
             modelBuilder.Entity("CDExellentAPI.Entities.User", b =>
                 {
                     b.Property<int>("ID")
@@ -579,28 +468,6 @@ namespace CDExellentAPI.Migrations
                     b.ToTable("VisitPlan");
                 });
 
-            modelBuilder.Entity("CDExellentAPI.Entities.Answer", b =>
-                {
-                    b.HasOne("CDExellentAPI.Entities.Question", "Question")
-                        .WithMany("Answers")
-                        .HasForeignKey("QuestionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Question");
-                });
-
-            modelBuilder.Entity("CDExellentAPI.Entities.Blog", b =>
-                {
-                    b.HasOne("CDExellentAPI.Entities.User", "Creator")
-                        .WithMany("Blogs")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Creator");
-                });
-
             modelBuilder.Entity("CDExellentAPI.Entities.Delegation", b =>
                 {
                     b.HasOne("CDExellentAPI.Entities.Permission", "Permission")
@@ -658,17 +525,6 @@ namespace CDExellentAPI.Migrations
                     b.Navigation("VisitPlan");
                 });
 
-            modelBuilder.Entity("CDExellentAPI.Entities.Media", b =>
-                {
-                    b.HasOne("CDExellentAPI.Entities.User", "User")
-                        .WithMany("Medias")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CDExellentAPI.Entities.Permission", b =>
                 {
                     b.HasOne("CDExellentAPI.Entities.Module", "Module")
@@ -678,28 +534,6 @@ namespace CDExellentAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Module");
-                });
-
-            modelBuilder.Entity("CDExellentAPI.Entities.Question", b =>
-                {
-                    b.HasOne("CDExellentAPI.Entities.Survey", "Survey")
-                        .WithMany("Questions")
-                        .HasForeignKey("SurveyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Survey");
-                });
-
-            modelBuilder.Entity("CDExellentAPI.Entities.Survey", b =>
-                {
-                    b.HasOne("CDExellentAPI.Entities.User", "Creator")
-                        .WithMany("Surveys")
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Creator");
                 });
 
             modelBuilder.Entity("CDExellentAPI.Entities.Task", b =>
@@ -754,6 +588,25 @@ namespace CDExellentAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("CDExellentAPI.Entities.Upload", b =>
+                {
+                    b.HasOne("CDExellentAPI.Entities.Media", "Media")
+                        .WithMany("Uploads")
+                        .HasForeignKey("MediaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CDExellentAPI.Entities.User", "User")
+                        .WithMany("Uploads")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Media");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CDExellentAPI.Entities.User", b =>
@@ -833,6 +686,11 @@ namespace CDExellentAPI.Migrations
                     b.Navigation("VisitPlans");
                 });
 
+            modelBuilder.Entity("CDExellentAPI.Entities.Media", b =>
+                {
+                    b.Navigation("Uploads");
+                });
+
             modelBuilder.Entity("CDExellentAPI.Entities.Module", b =>
                 {
                     b.Navigation("Permissions");
@@ -846,16 +704,6 @@ namespace CDExellentAPI.Migrations
             modelBuilder.Entity("CDExellentAPI.Entities.PlanStatus", b =>
                 {
                     b.Navigation("VisitPlans");
-                });
-
-            modelBuilder.Entity("CDExellentAPI.Entities.Question", b =>
-                {
-                    b.Navigation("Answers");
-                });
-
-            modelBuilder.Entity("CDExellentAPI.Entities.Survey", b =>
-                {
-                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("CDExellentAPI.Entities.TaskStatus", b =>
@@ -877,8 +725,6 @@ namespace CDExellentAPI.Migrations
                 {
                     b.Navigation("AssignedTasks");
 
-                    b.Navigation("Blogs");
-
                     b.Navigation("Delegations");
 
                     b.Navigation("Distributors");
@@ -887,13 +733,11 @@ namespace CDExellentAPI.Migrations
 
                     b.Navigation("Managers");
 
-                    b.Navigation("Medias");
-
                     b.Navigation("PlannedTasks");
 
                     b.Navigation("ReportedTasks");
 
-                    b.Navigation("Surveys");
+                    b.Navigation("Uploads");
 
                     b.Navigation("VisitPlans");
                 });

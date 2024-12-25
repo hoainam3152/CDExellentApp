@@ -44,5 +44,13 @@ namespace CDExellentAPI.Entities
         public ICollection<Task> AssignedTasks { get; set; }
         public ICollection<Task> ReportedTasks { get; set; }
         public ICollection<Task> PlannedTasks { get; set; }
+        //Delegation
+        public ICollection<Delegation> Delegations { get; set; }
+        //Media
+        public ICollection<Media> Medias { get; set; }
+        //Blog
+        public ICollection<Blog> Blogs { get; set; }
+        //Survey
+        public ICollection<Survey> Surveys { get; set; }
     }
 }
