@@ -17,6 +17,21 @@ builder.Services.AddDbContext<ManagementDbContext>(option => option.UseSqlServer
 
 //Register Services
 builder.Services.AddScoped<IAreaRepository, AreaService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryService>();
+builder.Services.AddScoped<ITitleRepository, TitleService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
+//builder.Services.AddScoped<IAreaRepository, AreaService>();
 
 var app = builder.Build();
 

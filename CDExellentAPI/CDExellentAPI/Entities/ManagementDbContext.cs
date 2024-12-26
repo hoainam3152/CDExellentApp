@@ -30,8 +30,6 @@ namespace CDExellentAPI.Entities
         public DbSet<SurveyAssignee> SurveyAssignees { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Receive> Receives { get; set; }
-        //public DbSet<Survey> Surveys { get; set; }
-        //public DbSet<Survey> Surveys { get; set; }
         #endregion
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

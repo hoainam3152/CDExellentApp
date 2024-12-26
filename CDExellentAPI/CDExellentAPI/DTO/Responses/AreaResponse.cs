@@ -14,8 +14,8 @@ namespace CDExellentAPI.DTO.Responses
 
         public AreaResponse(Area area)
         {
-            this.ID = area.ID;
-            this.Name = area.Name;
+            ID = area.ID;
+            Name = area.Name;
         }
     }
 }
