@@ -52,5 +52,11 @@ namespace CDExellentAPI.Entities
         public ICollection<Blog> Blogs { get; set; }
         //Survey
         public ICollection<Survey> Surveys { get; set; }
+        //SurveyAssignee
+        public ICollection<SurveyAssignee> SurveyAssignees { get; set; }
+        //Notification
+        public ICollection<Notification> Notifications { get; set; }
+        //Receiver
+        public ICollection<Receive> Receives { get; set; }
     }
 }

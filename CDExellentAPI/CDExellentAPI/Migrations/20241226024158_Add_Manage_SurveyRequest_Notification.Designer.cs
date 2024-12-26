@@ -4,6 +4,7 @@ using CDExellentAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CDExellentAPI.Migrations
 {
     [DbContext(typeof(ManagementDbContext))]
-    partial class ManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241226024158_Add_Manage_SurveyRequest_Notification")]
+    partial class Add_Manage_SurveyRequest_Notification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -378,6 +380,9 @@ namespace CDExellentAPI.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("SurveyID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -386,6 +391,8 @@ namespace CDExellentAPI.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("CreatorId");
+
+                    b.HasIndex("SurveyID");
 
                     b.ToTable("Survey");
                 });
@@ -824,6 +831,10 @@ namespace CDExellentAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CDExellentAPI.Entities.Survey", null)
+                        .WithMany("Surveys")
+                        .HasForeignKey("SurveyID");
+
                     b.Navigation("Creator");
                 });
 
@@ -849,7 +860,7 @@ namespace CDExellentAPI.Migrations
             modelBuilder.Entity("CDExellentAPI.Entities.SurveyRequest", b =>
                 {
                     b.HasOne("CDExellentAPI.Entities.Survey", "Survey")
-                        .WithMany("SurveyRequests")
+                        .WithMany()
                         .HasForeignKey("SurveyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1017,7 +1028,7 @@ namespace CDExellentAPI.Migrations
                 {
                     b.Navigation("Questions");
 
-                    b.Navigation("SurveyRequests");
+                    b.Navigation("Surveys");
                 });
 
             modelBuilder.Entity("CDExellentAPI.Entities.SurveyRequest", b =>

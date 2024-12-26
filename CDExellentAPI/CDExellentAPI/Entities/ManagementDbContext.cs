@@ -26,10 +26,10 @@ namespace CDExellentAPI.Entities
         public DbSet<Survey> Surveys { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
-        //public DbSet<Survey> Surveys { get; set; }
-        //public DbSet<Survey> Surveys { get; set; }
-        //public DbSet<Survey> Surveys { get; set; }
-        //public DbSet<Survey> Surveys { get; set; }
+        public DbSet<SurveyRequest> SurveyRequests { get; set; }
+        public DbSet<SurveyAssignee> SurveyAssignees { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Receive> Receives { get; set; }
         //public DbSet<Survey> Surveys { get; set; }
         //public DbSet<Survey> Surveys { get; set; }
         #endregion
@@ -87,7 +87,7 @@ namespace CDExellentAPI.Entities
                 .HasForeignKey(e => e.AreaId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            //User_Permission
+            //Delegation
             modelBuilder.Entity<Delegation>(entity =>
             {
                 //Create many PK
@@ -101,6 +101,40 @@ namespace CDExellentAPI.Entities
                 entity.HasOne(e => e.Permission)
                     .WithMany(e => e.Delegations)
                     .HasForeignKey(e => e.PermissionId);
+            });
+
+            //SurveyAssignee
+            modelBuilder.Entity<SurveyAssignee>(entity =>
+            {
+                //Create many PK
+                entity.HasKey(e => new { e.SurveyRequestId, e.AssigneeId });
+
+                //Create FK
+                entity.HasOne(e => e.SurveyRequest)
+                    .WithMany(e => e.SurveyAssignees)
+                    .HasForeignKey(e => e.SurveyRequestId);
+
+                entity.HasOne(e => e.Assignee)
+                    .WithMany(e => e.SurveyAssignees)
+                    .HasForeignKey(e => e.AssigneeId)
+                    .OnDelete(DeleteBehavior.NoAction);
+            });
+
+            //Receive
+            modelBuilder.Entity<Receive>(entity =>
+            {
+                //Create many PK
+                entity.HasKey(e => new { e.NotificationId, e.ReceiverId });
+
+                //Create FK
+                entity.HasOne(e => e.Notification)
+                    .WithMany(e => e.Receives)
+                    .HasForeignKey(e => e.NotificationId);
+
+                entity.HasOne(e => e.Receiver)
+                    .WithMany(e => e.Receives)
+                    .HasForeignKey(e => e.ReceiverId)
+                    .OnDelete(DeleteBehavior.NoAction);
             });
         }
     }
