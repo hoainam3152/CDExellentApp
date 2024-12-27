@@ -19,10 +19,10 @@ builder.Services.AddDbContext<ManagementDbContext>(option => option.UseSqlServer
 builder.Services.AddScoped<IAreaRepository, AreaService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryService>();
 builder.Services.AddScoped<ITitleRepository, TitleService>();
-//builder.Services.AddScoped<IAreaRepository, AreaService>();
-//builder.Services.AddScoped<IAreaRepository, AreaService>();
-//builder.Services.AddScoped<IAreaRepository, AreaService>();
-//builder.Services.AddScoped<IAreaRepository, AreaService>();
+builder.Services.AddScoped<IUserRepository, UserService>();
+builder.Services.AddScoped<IDistributorRepository, DistributorService>();
+builder.Services.AddScoped<IVisitPlanRepository, VisitPlanService>();
+builder.Services.AddScoped<ITaskRepository, TaskService>();
 //builder.Services.AddScoped<IAreaRepository, AreaService>();
 //builder.Services.AddScoped<IAreaRepository, AreaService>();
 //builder.Services.AddScoped<IAreaRepository, AreaService>();

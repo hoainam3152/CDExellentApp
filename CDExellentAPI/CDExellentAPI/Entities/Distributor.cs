@@ -13,6 +13,8 @@ namespace CDExellentAPI.Entities
         public string Name { get; set; }
         [StringLength(255)]
         public string Email { get; set; }
+        [StringLength(255)]
+        public string Address { get; set; }
         [StringLength(10)]
         public string? PhoneNumber { get; set; }
         public int SalesManagementId { get; set; }

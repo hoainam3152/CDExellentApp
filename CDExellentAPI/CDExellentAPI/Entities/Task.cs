@@ -31,7 +31,7 @@ namespace CDExellentAPI.Entities
 
         [ForeignKey("AssigneeId")]
         public User Assignee { get; set; }
-        [ForeignKey("RepoterId")]
+        [ForeignKey("ReporterId")]
         public User Reporter { get; set; }
         [ForeignKey("PlanUserId")]
         public User PlanUser { get; set; }

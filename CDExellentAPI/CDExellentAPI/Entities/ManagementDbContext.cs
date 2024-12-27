@@ -14,7 +14,7 @@ namespace CDExellentAPI.Entities
         public DbSet<Distributor> Distributors { get; set; }
         public DbSet<TypeDate> TypeDates { get; set; }
         public DbSet<PlanStatus> PlanStatuses { get; set; }
-        public DbSet<VisitPlan> Plans { get; set; }
+        public DbSet<VisitPlan> VisitPlans { get; set; }
         public DbSet<Guest> Guests { get; set; }
         public DbSet<TaskStatus> TaskStatuses { get; set; }
         public DbSet<Task> Tasks { get; set; }
@@ -78,7 +78,6 @@ namespace CDExellentAPI.Entities
                 .OnDelete(DeleteBehavior.NoAction);
 
             //Distributor
-            //Visit Plan
             modelBuilder.Entity<Distributor>()
                 .HasOne(e => e.Area)
                 .WithMany(e => e.Distributors)

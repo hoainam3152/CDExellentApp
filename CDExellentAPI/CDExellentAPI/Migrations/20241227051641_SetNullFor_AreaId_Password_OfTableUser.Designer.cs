@@ -4,6 +4,7 @@ using CDExellentAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CDExellentAPI.Migrations
 {
     [DbContext(typeof(ManagementDbContext))]
-    partial class ManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241227051641_SetNullFor_AreaId_Password_OfTableUser")]
+    partial class SetNullFor_AreaId_Password_OfTableUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,11 +144,6 @@ namespace CDExellentAPI.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("AreaId")
                         .IsRequired()
@@ -480,6 +477,9 @@ namespace CDExellentAPI.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<int>("ReporterId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RepoterId")
                         .HasColumnType("int");
 
                     b.Property<int?>("StarRate")

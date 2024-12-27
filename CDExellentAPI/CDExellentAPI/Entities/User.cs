@@ -23,7 +23,7 @@ namespace CDExellentAPI.Entities
         [StringLength(255)]
         public string? Address { get; set; }
         [StringLength(255)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [ForeignKey("TitleId")]
         public Title Title { get; set; }
