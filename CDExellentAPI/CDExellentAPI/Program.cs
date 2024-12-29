@@ -29,8 +29,8 @@ builder.Services.AddScoped<IQuestionRepository, QuestionService>();
 builder.Services.AddScoped<IAnswerRepository, AnswerService>();
 builder.Services.AddScoped<ISurveyRequestRepository, SurveyRequestService>();
 builder.Services.AddScoped<ISurveyAssigneeRepository, SurveyAssigneeService>();
-//builder.Services.AddScoped<IAreaRepository, AreaService>();
-//builder.Services.AddScoped<IAreaRepository, AreaService>();
+builder.Services.AddScoped<INotificationRepository, NotificationService>();
+builder.Services.AddScoped<IReceiveRepository, ReceiveService>();
 //builder.Services.AddScoped<IAreaRepository, AreaService>();
 
 var app = builder.Build();
