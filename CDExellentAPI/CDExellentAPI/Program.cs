@@ -35,8 +35,6 @@ builder.Services.AddScoped<IModuleRepository, ModuleService>();
 builder.Services.AddScoped<IPermissionRepository, PermissionService>();
 builder.Services.AddScoped<IDelegationRepository, DelegationService>();
 builder.Services.AddScoped<IGuestRepository, GuestService>();
-//builder.Services.AddScoped<IModuleRepository, ModuleService>();
-//builder.Services.AddScoped<IModuleRepository, ModuleService>();
 
 var app = builder.Build();
 
